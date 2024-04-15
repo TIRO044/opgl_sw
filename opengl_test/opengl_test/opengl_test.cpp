@@ -3,7 +3,10 @@
 
 #include <iostream>
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#pragma comment(lib, "opengl32.lib")
+#pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "glfw3.lib")
 
 const unsigned int WIN_W = 300;
@@ -17,8 +20,13 @@ int main()
     GLFWwindow* window = glfwCreateWindow(WIN_W, WIN_H, "Hellow GLFW", NULL, NULL);
     glfwMakeContextCurrent(window);
 
+    glewInit();
+    
     while(!glfwWindowShouldClose(window))
     {
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        
         glfwPollEvents();
     }
 
