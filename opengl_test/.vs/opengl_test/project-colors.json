@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "90bbff51-eae5-49b8-a5a1-3d1c407d502c": {
+      "ProjectGuid": "90bbff51-eae5-49b8-a5a1-3d1c407d502c",
+      "DisplayName": "opengl_test",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
