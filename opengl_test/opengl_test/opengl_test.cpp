@@ -3,34 +3,32 @@
 
 #include <iostream>
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #pragma comment(lib, "opengl32.lib")
-#pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "glfw3.lib")
+#include <stdio.h>
+#include "glad.c"
 
 const unsigned int WIN_W = 300;
 const unsigned int WIN_H = 300;
 
 int main()
 {
-    std::cout << "Hello World!\n";
-
     glfwInit();
     GLFWwindow* window = glfwCreateWindow(WIN_W, WIN_H, "Hellow GLFW", NULL, NULL);
     glfwMakeContextCurrent(window);
 
-    glewInit();
-    
+    gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
     while(!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        
+        glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     glfwTerminate();
     return 0;
 }
-
