@@ -18,5 +18,16 @@
     <ClCompile Include="opengl_test.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="common.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="c24-colored-tri.frag">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="c24-colored-tri.vert">
+      <Filter>소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

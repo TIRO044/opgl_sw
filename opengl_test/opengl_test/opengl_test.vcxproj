@@ -139,11 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="14\14a-refresh.c" />
-    <ClCompile Include="14\14b-kbd-input.c" />
-    <ClCompile Include="14\14c-color-change.c" />
-    <ClCompile Include="14\14d-full-scr.c" />
+    <ClCompile Include="common.c" />
     <ClCompile Include="opengl_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="c24-colored-tri.frag" />
+    <None Include="c24-colored-tri.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
