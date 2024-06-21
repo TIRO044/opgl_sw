@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\uniform_move">
+      <UniqueIdentifier>{8b3cf502-2c22-45ec-beb2-31ee5fc5ab08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="opengl_test.cpp">
@@ -28,6 +31,12 @@
     </None>
     <None Include="c24-colored-tri.vert">
       <Filter>소스 파일</Filter>
+    </None>
+    <None Include="uniform_move\c25-uniform-tri.frag">
+      <Filter>소스 파일\uniform_move</Filter>
+    </None>
+    <None Include="uniform_move\c25-uniform-tri.vert">
+      <Filter>소스 파일\uniform_move</Filter>
     </None>
   </ItemGroup>
 </Project>

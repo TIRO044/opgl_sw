@@ -12,8 +12,8 @@ const unsigned int WIN_H = 500;
 const unsigned int WIN_X = 100; // window position in pixels, (X, Y)
 const unsigned int WIN_Y = 100;
 
-const char* vertFileName = "c24-colored-tri.vert";
-const char* fragFileName = "c24-colored-tri.frag";
+const char* vertFileName = "uniform_move/c25-uniform-tri.vert";
+const char* fragFileName = "uniform_move/c25-uniform-tri.frag";
 
 GLuint vert = 0; // vertex shader ID number
 GLuint frag = 0; // fragment shader ID number
@@ -43,9 +43,9 @@ void initFunc(void) {
 }
 
 GLfloat vertPos[] = {
-	-0.5F, -0.5F, 0.0F, 1.0F,
-	+0.5F, -0.5F, 0.0F, 1.0F,
-	-0.5F, +0.5F, 0.0F, 1.0F,
+	0.0F, 0.0F, 0.0F, 1.0F,
+	0.5F, 0.0F, 0.0F, 1.0F,
+	0.0F, 0.5F, 0.0F, 1.0F,
 };
 
 GLfloat vertColor[] = {
@@ -65,8 +65,14 @@ void drawFunc(void) {
 	loc = glGetAttribLocation(prog, "aColor");
 	glEnableVertexAttribArray(loc);
 	glVertexAttribPointer(loc, 4, GL_FLOAT, GL_FALSE, 0, vertColor);
-	// draw a triangle
+	
+	GLuint locMove = glGetUniformLocation(prog, "uMove");
+	glUniform4f(locMove, -0.5F, -0.5F, 0.0F, 0.0F);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	// draw the second triangle
+	glUniform4f(locMove, 0.0F, 0.0F, 0.0F, 0.0F);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
 	// done
 	glFinish();
 }
