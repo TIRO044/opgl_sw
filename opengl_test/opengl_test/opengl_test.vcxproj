@@ -143,10 +143,14 @@
     <ClCompile Include="opengl_test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="c24-colored-tri.frag" />
-    <None Include="c24-colored-tri.vert" />
+    <None Include="colored\c24-colored-tri.frag" />
+    <None Include="colored\c24-colored-tri.vert" />
     <None Include="uniform_move\c25-uniform-tri.frag" />
     <None Include="uniform_move\c25-uniform-tri.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="vert_rotate\c31-rotate.frag" />
+    <Content Include="vert_rotate\c31-rotate.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
