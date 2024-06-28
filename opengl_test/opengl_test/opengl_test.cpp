@@ -1,6 +1,14 @@
-﻿
+﻿#ifndef __cplusplus
+#error This file works only with C++
+#endif
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <chrono>
 #include <iostream>
+using namespace std;
+using namespace std::chrono;
+
 using namespace std;
 
 #pragma warning(disable: 4711 4710 4100 4514 4626 4774 4365 4625 4464 4571 4201 5026 5027 5039)
@@ -88,11 +96,13 @@ glm::vec4 vertColor[] = {
 	{ 0.0F, 0.0F, 1.0F, 1.0F, }, // blue
 };
 
-const float theta_step = 0.01F; // radians. must be tuned for your system
 float theta = 0.0F;
+system_clock::time_point lastTime = system_clock::now();
 
 void updateFunc(void) {
-	theta += theta_step; // radian
+	system_clock::time_point curTime = system_clock::now();
+	milliseconds elapsedTimeMSEC = duration_cast<milliseconds>(curTime - lastTime); // in millisecond
+	theta = (elapsedTimeMSEC.count() / 1000.0F) * static_cast<float>(M_PI_2); // in <math.h>, M_PI_2 = pi/2
 }
 
 void drawFunc(void) {
@@ -130,7 +140,7 @@ void keyFunc(GLFWwindow* window, int key, int scancode, int action, int mods) {
 		break;
 	case GLFW_KEY_R:
 		if (action == GLFW_PRESS) {
-			theta = 0.0F;
+			lastTime = system_clock::now();
 		}
 		break;
 	}
