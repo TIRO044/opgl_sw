@@ -31,7 +31,7 @@ const char* fragFileName = "c32-single-color.frag";
 
 GLuint vert = 0; // vertex shader ID number
 GLuint frag = 0; // fragment shader ID number
-GLuint prog = 0; // shader program ID number
+GLuint prog = 0; // shader program ID number 
 
 void initFunc(void) {
 	const char* vertSource = loadFile( vertFileName );
