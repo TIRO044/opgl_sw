@@ -1,9 +1,14 @@
 ﻿#ifndef __cplusplus
 #error This file works only with C++
 #endif
+
 #define GLM_ENABLE_EXPERIMENTAL
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <chrono>
 #include <iostream>
 using namespace std;
+using namespace std::chrono;
 
 #pragma warning(disable: 4711 4710 4100 4514 4626 4774 4365 4625 4464 4571 4201 5026 5027 5039)
 
@@ -26,8 +31,8 @@ const unsigned int WIN_H = 500;
 const unsigned int WIN_X = 100; // window position in pixels, (X, Y)
 const unsigned int WIN_Y = 100;
 
-const char* vertFileName = "c32-single-color.vert";
-const char* fragFileName = "c32-single-color.frag";
+const char* vertFileName = "c32-rotate2.vert";
+const char* fragFileName = "c32-rotate2.frag";
 
 GLuint vert = 0; // vertex shader ID number
 GLuint frag = 0; // fragment shader ID number
@@ -76,44 +81,26 @@ void initFunc(void) {
 	free( (void*)fragSource );
 }
 
-glm::vec4 vertRed[] = {
-	{ +0.4F, -0.8F, -0.5F, 1.0F, },
-	{ +0.6F, -0.8F, -0.5F, 1.0F, },
-	{ +0.6F, +0.8F, +0.5F, 1.0F, },
-	{ +0.6F, +0.8F, +0.5F, 1.0F, },
-	{ +0.4F, +0.8F, +0.5F, 1.0F, },
-	{ +0.4F, -0.8F, -0.5F, 1.0F, },
+glm::vec4 vertPos[3] = { // triangle
+	{ -0.5F, -0.5F, 0.0F, 1.0F, },
+	{ +0.5F, -0.5F, 0.0F, 1.0F, },
+	{ -0.5F, +0.5F, 0.0F, 1.0F, },
 };
 
-glm::vec4 vertGreen[] = {
-	{ +0.8F, +0.4F, -0.5F, 1.0f, },
-	{ +0.8F, +0.6F, -0.5F, 1.0f, },
-	{ -0.8F, +0.6F, +0.5F, 1.0f, },
-	{ -0.8F, +0.6F, +0.5F, 1.0f, },
-	{ -0.8F, +0.4F, +0.5F, 1.0f, },
-	{ +0.8F, +0.4F, -0.5F, 1.0f, },
+glm::vec4 vertColor[] = {
+	{ 1.0F, 0.0F, 0.0F, 1.0F, }, // red
+	{ 0.0F, 1.0F, 0.0F, 1.0F, }, // green
+	{ 0.0F, 0.0F, 1.0F, 1.0F, }, // blue
 };
 
-glm::vec4 vertBlue[] = {
-	{ -0.4F, +0.8F, -0.5F, 1.0F, },
-	{ -0.6F, +0.8F, -0.5F, 1.0F, },
-	{ -0.6F, -0.8F, +0.5F, 1.0F, },
-	{ -0.6F, -0.8F, +0.5F, 1.0F, },
-	{ -0.4F, -0.8F, +0.5F, 1.0F, },
-	{ -0.4F, +0.8F, -0.5F, 1.0F, },
-};
 
-glm::vec4 vertYellow[] = {
-	{ -0.8F, -0.4F, -0.5F, 1.0f, },
-	{ -0.8F, -0.6F, -0.5F, 1.0f, },
-	{ +0.8F, -0.6F, +0.5F, 1.0f, },
-	{ +0.8F, -0.6F, +0.5F, 1.0f, },
-	{ +0.8F, -0.4F, +0.5F, 1.0f, },
-	{ -0.8F, -0.4F, -0.5F, 1.0f, },
-};
+float theta = 0.0F;
+system_clock::time_point lastTime = system_clock::now();
 
 void updateFunc(void) {
-	// do nothing
+	system_clock::time_point curTime = system_clock::now();
+	milliseconds elapsedTimeMSEC = duration_cast<milliseconds>(curTime - lastTime); // in millisecond
+	theta = (elapsedTimeMSEC.count() / 1000.0F) * (float)M_PI_2 / 4.0F; // in <math.h>, M_PI_2 = pi/2
 }
 
 void drawFunc(void) {
@@ -123,25 +110,22 @@ void drawFunc(void) {
 	// clear in gray color
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	// provide the vertex attributes
+
+	// 위치
 	GLuint locPos = glGetAttribLocation(prog, "aPos");
 	glEnableVertexAttribArray(locPos);
-	GLuint locColor = glGetUniformLocation(prog, "uColor");
-	// red 
-	glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertRed[0]));
-	glUniform4f(locColor, 1.0F, 0.3F, 0.3F, 1.0F); // (light) red
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	// green 
-	glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertGreen[0]));
-	glUniform4f(locColor, 0.3F, 1.0F, 0.3F, 1.0F); // (light) green
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	// blue
-	glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertBlue[0]));
-	glUniform4f(locColor, 0.3F, 0.3F, 1.0F, 1.0F); // (light) blue
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	// yellow
-	glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertYellow[0]));
-	glUniform4f(locColor, 1.0F, 1.0F, 0.3F, 1.0F); // (light) yellow
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertPos[0]));
+
+	// 색상
+	GLuint aColor = glGetAttribLocation(prog, "aColor");
+	glEnableVertexAttribArray(aColor);
+	glVertexAttribPointer(aColor, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertColor[0]));
+
+	// uTheta
+	GLuint locuTheta = glGetUniformLocation(prog, "uTheta");
+	glUniform1f(locuTheta, theta);
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	// done
 	glFinish();
 }
