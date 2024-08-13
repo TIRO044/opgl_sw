@@ -77,71 +77,56 @@ void initFunc(void) {
 	free((void*)fragSource);
 }
 
-glm::vec4 vertPos[] = { // 6 * 3 = 18 vertices
-	// face 0: v0-v1-v2
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
-	// face 1: v0-v2-v3
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	// face 2: v0-v3-v4
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
-	// face 3: v0-v4-v1
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	// face 4: v1-v4-v3
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	// face 5: v1-v3-v2
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
-	// your reference
-#if 0
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
-#endif
+glm::vec4 vertPos[] = { // 9 points
+	{ -0.4F, -0.8F, 0.0F, 1.0F, },
+	{ +0.4F, -0.8F, 0.0F, 1.0F, },
+	{ -0.4F, -0.4F, 0.0F, 1.0F, },
+	{ +0.5F, -0.4F, 0.0F, 1.0F, },
+	{ -0.5F, +0.0F, 0.0F, 1.0F, },
+	{ +0.5F, +0.0F, 0.0F, 1.0F, },
+	{ -0.6F, +0.4F, 0.0F, 1.0F, },
+	{ +0.6F, +0.4F, 0.0F, 1.0F, },
+	{ -0.8F, +0.8F, 0.0F, 1.0F, },
+};
+
+glm::vec4 vertFan[] = { // 6 points
+	{ -0.4F, -0.8F, 0.0F, 1.0F, }, // 0
+	{ +0.4F, -0.8F, 0.0F, 1.0F, }, // 1
+	{ +0.5F, -0.4F, 0.0F, 1.0F, }, // 3
+	{ +0.5F, +0.0F, 0.0F, 1.0F, }, // 5
+	{ +0.6F, +0.4F, 0.0F, 1.0F, }, // 7
+	{ -0.8F, +0.8F, 0.0F, 1.0F, }, // 8
+};
+
+glm::vec4 vertQuad[] = { // 9 points
+	{ -0.4F, -0.8F, 0.0F, 1.0F, },
+	{ +0.4F, -0.8F, 0.0F, 1.0F, },
+	{ +0.5F, -0.4F, 0.0F, 1.0F, },
+	{ -0.4F, -0.4F, 0.0F, 1.0F, },
+	{ -0.5F, +0.0F, 0.0F, 1.0F, },
+	{ +0.5F, +0.0F, 0.0F, 1.0F, },
+	{ +0.6F, +0.4F, 0.0F, 1.0F, },
+	{ -0.6F, +0.4F, 0.0F, 1.0F, },
+	{ -0.8F, +0.8F, 0.0F, 1.0F, },
 };
 
 glm::vec4 vertColor[] = {
-	// face 0: red
-	{ 1.0F, 0.3F, 0.3F, 1.0F, },
-	{ 1.0F, 0.3F, 0.3F, 1.0F, },
-	{ 1.0F, 0.3F, 0.3F, 1.0F, },
-	// face 1: green
-	{ 0.3F, 1.0F, 0.3F, 1.0F, },
-	{ 0.3F, 1.0F, 0.3F, 1.0F, },
-	{ 0.3F, 1.0F, 0.3F, 1.0F, },
-	// face 2: blue
-	{ 0.3F, 0.3F, 1.0F, 1.0F, },
-	{ 0.3F, 0.3F, 1.0F, 1.0F, },
-	{ 0.3F, 0.3F, 1.0F, 1.0F, },
-	// face 3: yellow
-	{ 1.0F, 1.0F, 0.3F, 1.0F, },
-	{ 1.0F, 1.0F, 0.3F, 1.0F, },
-	{ 1.0F, 1.0F, 0.3F, 1.0F, },
-	// face 4: cyan
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	// face 5: cyan
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
+	{ 1.0F, 0.4F, 0.4F, 1.0F, }, // red
+	{ 0.4F, 1.0F, 0.4F, 1.0F, }, // green
+	{ 0.4F, 0.4F, 1.0F, 1.0F, }, // blue
+	{ 1.0F, 0.4F, 0.4F, 1.0F, }, // red
+	{ 0.4F, 1.0F, 0.4F, 1.0F, }, // green
+	{ 0.4F, 0.4F, 1.0F, 1.0F, }, // blue
+	{ 1.0F, 0.4F, 0.4F, 1.0F, }, // red
+	{ 0.4F, 1.0F, 0.4F, 1.0F, }, // green
+	{ 0.4F, 0.4F, 1.0F, 1.0F, }, // blue
 };
 
 void updateFunc(void) {
 	// do nothing
 }
+
+int primKind = 15; // triangles
 
 void drawFunc(void) {
 	glEnable(GL_DEPTH_TEST);
@@ -153,11 +138,62 @@ void drawFunc(void) {
 	GLuint locPos = glGetAttribLocation(prog, "aPos");
 	glEnableVertexAttribArray(locPos);
 	glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertPos[0]));
+	// provide the color attributes
 	GLuint locColor = glGetAttribLocation(prog, "aColor");
 	glEnableVertexAttribArray(locColor);
 	glVertexAttribPointer(locColor, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertColor[0]));
-	// draw the pyramid
-	glDrawArrays(GL_TRIANGLES, 0, 18); // 18 vertices
+	// draw a primitive
+	switch (primKind) {
+	case 0: // point
+		glPointSize(9.0F); // big point !
+		glDrawArrays(GL_POINTS, 0, 9);
+		break;
+	case 1: // lines
+		glLineWidth(5.0F); // wide line
+		glDrawArrays(GL_LINES, 0, 9);
+		break;
+	case 2: // line strip
+		glLineWidth(5.0F); // wide line
+		glDrawArrays(GL_LINE_STRIP, 0, 9);
+		break;
+	case 3: // line loop
+		glLineWidth(5.0F); // wide line
+		glDrawArrays(GL_LINE_LOOP, 0, 9);
+		break;
+	default:
+	case 4: // triangles
+		glDrawArrays(GL_TRIANGLES, 0, 9);
+		break;
+	case 5: // triangle strip
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 9);
+		break;
+	case 15: // triangle strip
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 9);
+		glDisableVertexAttribArray(locColor);
+		glVertexAttrib4f(locColor, 1.0F, 0.0F, 0.0F, 1.0F);
+		glPointSize(9.0F); // big point !
+		glDrawArrays(GL_POINTS, 0, 9);
+		break;
+	case 6: // triangle fan
+		glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertFan[0]));
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
+		break;
+	case 16: // triangle fan
+		glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertFan[0]));
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
+		glDisableVertexAttribArray(locColor);
+		glVertexAttrib4f(locColor, 1.0F, 0.0F, 0.0F, 1.0F);
+		glPointSize(9.0F); // big point !
+		glDrawArrays(GL_POINTS, 0, 6);
+		break;
+	case 7: // quad
+		glVertexAttribPointer(locPos, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertQuad[0]));
+		glDrawArrays(GL_QUADS, 0, 9);
+		break;
+	case 8: // quad strip
+		glDrawArrays(GL_QUAD_STRIP, 0, 9);
+		break;
+	}
 	// done
 	glFinish();
 }
@@ -181,6 +217,10 @@ void keyFunc(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 int main(int argc, char* argv[]) {
 	const char* basename = getBaseName(argv[0]);
+	// argument processing
+	if (argc > 1) {
+		primKind = strtol(argv[1], nullptr, 10);
+	}
 	// start GLFW & GLEW
 	glfwInit();
 	glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
