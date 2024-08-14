@@ -3,8 +3,12 @@
 #endif
 
 #define GLM_ENABLE_EXPERIMENTAL
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <chrono>
 #include <iostream>
 using namespace std;
+using namespace std::chrono;
 
 #pragma warning(disable: 4711 4710 4100 4514 4626 4774 4365 4625 4464 4571 4201 5026 5027 5039)
 
@@ -27,8 +31,8 @@ const unsigned int WIN_H = 500;
 const unsigned int WIN_X = 100; // window position in pixels, (X, Y)
 const unsigned int WIN_Y = 100;
 
-const char* vertFileName = "c33-negate-z.vert";
-const char* fragFileName = "c33-negate-z.frag";
+const char* vertFileName = "c33-rotate-nz.vert";
+const char* fragFileName = "c33-rotate-nz.frag";
 
 GLuint vert = 0; // vertex shader ID number
 GLuint frag = 0; // fragment shader ID number
@@ -139,60 +143,45 @@ glm::vec4 vertColor[] = {
 	{ 0.3F, 1.0F, 1.0F, 1.0F, },
 };
 
+float theta = 0.0F;
+system_clock::time_point lastTime = system_clock::now();
+
 void updateFunc(void) {
-	// do nothing
+	system_clock::time_point curTime = system_clock::now();
+	milliseconds elapsedTimeMSEC = duration_cast<milliseconds>(curTime - lastTime); // in millisecond
+	theta = (elapsedTimeMSEC.count() / 1000.0F) * (float)M_PI_2; // in <math.h>, M_PI_2 = pi/2
 }
 
 int cullMode = 0;
 
 void drawFunc(void) {
-	static bool first = true;
 	glEnable(GL_DEPTH_TEST);
 	glDepthRange(0.0F, 1.0F);
 	glClearDepthf(1.0F);
 	switch (cullMode) {
 	default:
 	case 0:
-		if (first) {
-			printf("no face culling\n");
-		}
 		break;
 	case 1: // back-face culling, CCW facing
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CCW);
 		glCullFace(GL_BACK);
-		if (first) {
-			printf("back face culling, CCW facing\n");
-		}
 		break;
 	case 2: // front-face culling, CCW facing
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CCW);
 		glCullFace(GL_FRONT);
-		if (first) {
-			printf("front face culling, CCW facing\n");
-		}
 		break;
 	case 11: // back-face culling, CW facing
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CW);
 		glCullFace(GL_BACK);
-		if (first) {
-			printf("back face culling, CW facing\n");
-		}
 		break;
 	case 12: // front-face culling, CW facing
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CW);
 		glCullFace(GL_FRONT);
-		if (first) {
-			printf("front face culling, CW facing\n");
-		}
 		break;
-	}
-	if (first) {
-		fflush(stdout);
-		first = false;
 	}
 	// clear in gray color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -203,6 +192,8 @@ void drawFunc(void) {
 	GLuint locColor = glGetAttribLocation(prog, "aColor");
 	glEnableVertexAttribArray(locColor);
 	glVertexAttribPointer(locColor, 4, GL_FLOAT, GL_FALSE, 0, glm::value_ptr(vertColor[0]));
+	GLuint locTheta = glGetUniformLocation(prog, "uTheta");
+	glUniform1f(locTheta, theta);
 	// draw the pyramid
 	glDrawArrays(GL_TRIANGLES, 0, 18); // 18 vertices
 	// done
@@ -221,6 +212,11 @@ void keyFunc(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	case GLFW_KEY_ESCAPE:
 		if (action == GLFW_PRESS) {
 			glfwSetWindowShouldClose(window, GL_TRUE);
+		}
+		break;
+	case GLFW_KEY_R:
+		if (action == GLFW_PRESS) {
+			lastTime = system_clock::now();
 		}
 		break;
 	}

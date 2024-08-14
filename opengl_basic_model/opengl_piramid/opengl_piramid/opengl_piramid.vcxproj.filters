@@ -32,5 +32,17 @@
     <None Include="c33-colored-tri.vert">
       <Filter>소스 파일\shader</Filter>
     </None>
+    <None Include="c33-negate-z.frag">
+      <Filter>소스 파일\shader</Filter>
+    </None>
+    <None Include="c33-negate-z.vert">
+      <Filter>소스 파일\shader</Filter>
+    </None>
+    <None Include="c33-rotate-nz.frag">
+      <Filter>소스 파일\shader</Filter>
+    </None>
+    <None Include="c33-rotate-nz.vert">
+      <Filter>소스 파일\shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
