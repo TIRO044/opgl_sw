@@ -27,8 +27,8 @@ const unsigned int WIN_H = 500;
 const unsigned int WIN_X = 100; // window position in pixels, (X, Y)
 const unsigned int WIN_Y = 100;
 
-const char* vertFileName = "c33-colored-tri.vert";
-const char* fragFileName = "c33-colored-tri.frag";
+const char* vertFileName = "c33-negate-z.vert";
+const char* fragFileName = "c33-negate-z.frag";
 
 GLuint vert = 0; // vertex shader ID number
 GLuint frag = 0; // fragment shader ID number
@@ -81,34 +81,34 @@ glm::vec4 vertPos[] = { // 6 * 3 = 18 vertices
 	// face 0: v0-v1-v2
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
+	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
 	// face 1: v0-v2-v3
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
+	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
 	// face 2: v0-v3-v4
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
+	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
 	// face 3: v0-v4-v1
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
+	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
 	// face 4: v1-v4-v3
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
+	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
 	// face 5: v1-v3-v2
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
+	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
 	// your reference
 #if 0
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v2
+	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v4
+	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
 #endif
 };
 
@@ -143,7 +143,7 @@ void updateFunc(void) {
 	// do nothing
 }
 
-int cullMode = 1;
+int cullMode = 0;
 
 void drawFunc(void) {
 	static bool first = true;
