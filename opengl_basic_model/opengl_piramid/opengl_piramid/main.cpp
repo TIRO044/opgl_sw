@@ -106,8 +106,8 @@ glm::vec4 vertPos[] = { // 6 * 3 = 18 vertices
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
 	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
-	// your reference
 #if 0
+	// your reference
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
 	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
@@ -116,31 +116,39 @@ glm::vec4 vertPos[] = { // 6 * 3 = 18 vertices
 #endif
 };
 
-glm::vec4 vertColor[] = {
-	// face 0: red
-	{ 1.0F, 0.3F, 0.3F, 1.0F, },
-	{ 1.0F, 0.3F, 0.3F, 1.0F, },
-	{ 1.0F, 0.3F, 0.3F, 1.0F, },
-	// face 1: green
-	{ 0.3F, 1.0F, 0.3F, 1.0F, },
-	{ 0.3F, 1.0F, 0.3F, 1.0F, },
-	{ 0.3F, 1.0F, 0.3F, 1.0F, },
-	// face 2: blue
-	{ 0.3F, 0.3F, 1.0F, 1.0F, },
-	{ 0.3F, 0.3F, 1.0F, 1.0F, },
-	{ 0.3F, 0.3F, 1.0F, 1.0F, },
-	// face 3: yellow
-	{ 1.0F, 1.0F, 0.3F, 1.0F, },
-	{ 1.0F, 1.0F, 0.3F, 1.0F, },
-	{ 1.0F, 1.0F, 0.3F, 1.0F, },
-	// face 4: cyan
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	// face 5: cyan
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
-	{ 0.3F, 1.0F, 1.0F, 1.0F, },
+glm::vec4 vertColor[] = { // 6 * 3 = 18 colors
+	// face 0: v0-v1-v2
+	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
+	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
+	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
+	// face 1: v0-v2-v3
+	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
+	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
+	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
+	// face 2: v0-v3-v4
+	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
+	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
+	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
+	// face 3: v0-v4-v1
+	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
+	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
+	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
+	// face 4: v1-v4-v3
+	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
+	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
+	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
+	// face 5: v1-v3-v2
+	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
+	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
+	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
+#if 0
+	// your reference
+	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
+	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
+	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
+	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
+	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
+#endif
 };
 
 float theta = 0.0F;
