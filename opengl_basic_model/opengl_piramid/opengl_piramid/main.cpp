@@ -81,74 +81,29 @@ void initFunc(void) {
 	free((void*)fragSource);
 }
 
-glm::vec4 vertPos[] = { // 6 * 3 = 18 vertices
-	// face 0: v0-v1-v2
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
-	// face 1: v0-v2-v3
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	// face 2: v0-v3-v4
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
-	// face 3: v0-v4-v1
-	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	// face 4: v1-v4-v3
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	// face 5: v1-v3-v2
-	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
-	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
-	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
-#if 0
-	// your reference
+glm::vec4 vertPos[] = { // 5 vertices
 	{ 0.0F, 0.5F, 0.0F, 1.0F }, // v0
 	{ 0.5F, -0.3F, 0.0F, 1.0F }, // v1
 	{ 0.0F, -0.3F, -0.5F, 1.0F }, // v2
 	{ -0.5F, -0.3F, 0.0F, 1.0F }, // v3
 	{ 0.0F, -0.3F, 0.5F, 1.0F }, // v4
-#endif
 };
 
-glm::vec4 vertColor[] = { // 6 * 3 = 18 colors
-	// face 0: v0-v1-v2
-	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
-	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
-	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
-	// face 1: v0-v2-v3
-	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
-	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
-	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
-	// face 2: v0-v3-v4
-	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
-	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
-	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
-	// face 3: v0-v4-v1
-	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
-	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
-	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
-	// face 4: v1-v4-v3
-	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
-	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
-	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
-	// face 5: v1-v3-v2
-	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
-	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
-	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
-#if 0
-	// your reference
+glm::vec4 vertColor[] = { // 5 colors
 	{ 1.0F, 1.0F, 1.0F, 1.0F, }, // v0: white
 	{ 1.0F, 0.3F, 0.3F, 1.0F, }, // v1: red
 	{ 0.3F, 1.0F, 0.3F, 1.0F, }, // v2: green
 	{ 0.3F, 0.3F, 1.0F, 1.0F, }, // v3: blue
 	{ 1.0F, 1.0F, 0.3F, 1.0F, }, // v4: yellow
-#endif
+};
+
+GLuint indices[] = { // 6 * 3 = 18 indices
+	0, 1, 2, // face 0: v0-v1-v2
+	0, 2, 3, // face 1: v0-v2-v3
+	0, 3, 4, // face 2: v0-v3-v4
+	0, 4, 1, // face 3: v0-v4-v1
+	1, 4, 3, // face 4: v1-v4-v3
+	1, 3, 2, // face 5: v1-v3-v2
 };
 
 float theta = 0.0F;
@@ -203,7 +158,7 @@ void drawFunc(void) {
 	GLuint locTheta = glGetUniformLocation(prog, "uTheta");
 	glUniform1f(locTheta, theta);
 	// draw the pyramid
-	glDrawArrays(GL_TRIANGLES, 0, 18); // 18 vertices
+	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, indices); // 18 indices
 	// done
 	glFinish();
 }
